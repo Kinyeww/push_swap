@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_utils1.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckin-yew <ckin-yew@student.42kl.edu.m      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/15 20:26:02 by ckin-yew          #+#    #+#             */
+/*   Updated: 2025/11/15 20:26:03 by ckin-yew         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_list	*find_last_node(t_list *head)
@@ -11,7 +23,7 @@ t_list	*find_last_node(t_list *head)
 
 long	ft_atoi(const char *nptr)
 {
-	int	sign;
+	int		sign;
 	long	result;
 
 	sign = 1;

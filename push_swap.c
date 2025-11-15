@@ -1,41 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckin-yew <ckin-yew@student.42kl.edu.m      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/15 20:25:45 by ckin-yew          #+#    #+#             */
+/*   Updated: 2025/11/15 20:25:46 by ckin-yew         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
-
-void	free_tokens(char **arr)
-{
-	int	i;
-
-	if (!arr)
-		return;
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
-int	ft_checknum(char **arr)
-{
-	int		i;
-	long	num;
-
-	i = 0;
-	while (arr[i])
-	{
-		num = ft_atoi(arr[i]);
-		if (num < INT_MIN || num > INT_MAX)
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 char	**ft_tokenise(int argc, char **argv)
 {
 	char	**tokens;
 	char	*joined;
-	int	i;
+	int		i;
 
 	i = 1;
 	joined = NULL;
@@ -55,24 +36,16 @@ char	**ft_tokenise(int argc, char **argv)
 	return (tokens);
 }
 
-int	check_dupes(t_list *stack_a)
+void	sort_small_num(int argc, t_list *stack_a, t_list *stack_b)
 {
-	int		cmp;
-	t_list	*start;
-
-	while (stack_a->nextnode)
-	{
-		start = stack_a;
-		cmp = stack_a->value;
-		while (start->nextnode)
-		{
-			start = start->nextnode;
-			if (cmp == start->value)
-				return (0);
-		}
-		stack_a = stack_a->nextnode;
-	}
-	return (1);
+	if (argc == 3)
+		sort_two(&stack_a);
+	else if (argc == 4)
+		sort_three();
+	else if (argc == 5)
+		sort_four();
+	else if (argc == 6)
+		sort_five();
 }
 
 void	radix_sort(t_list **stack_a, t_list **stack_b)
@@ -104,20 +77,13 @@ void	radix_sort(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-t_list	*push_swap(int argc, char **argv)
+t_list	*push_swap(char **checked, int argc)
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
-	char	**checked;
-	int	i;
-	int	value;
+	int		i;
+	int		value;
 
-	checked = ft_tokenise(argc, argv);
-	if (!checked || ft_checknum(checked) != 1)
-	{
-		free_tokens(checked);
-		return (NULL);
-	}
 	value = ft_atoi(checked[0]);
 	stack_a = create_node(value);
 	i = 1;
@@ -134,26 +100,31 @@ t_list	*push_swap(int argc, char **argv)
 	}
 	assign_index(stack_a);
 	stack_b = NULL;
+	if (stack_a->index < 5)
+		sort_small_num(argc, &stack_a, &stack_b);
 	radix_sort(&stack_a, &stack_b);
 	return (stack_a);
 }
 
 int	main(int argc, char **argv)
 {
-	// char	**token;
+	char	**checked;
 
 	if (argc < 2)
 	{
 		write(2, "Error\n", 6);
 		return (1);
 	}
-	else
+	checked = ft_tokenise(argc, argv);
+	if (!checked || ft_checknum(checked) != 1)
 	{
-		if (!(push_swap(argc, argv)))
-		{
-			write(2, "Error\n", 6);
-			return (1);
-		}
+		free_tokens(checked);
+		return (1);
+	}
+	if (!(push_swap(checked, argc)))
+	{
+		write(2, "Error\n", 6);
+		return (1);
 	}
 	return (0);
 }
