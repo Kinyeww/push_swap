@@ -1,22 +1,22 @@
 #include "push_swap.h"
 
-l_list	*create_node(int value)
+t_list	*create_node(int value)
 {
-	l_list	*new_node;
+	t_list	*new_node;
 
-	new_node = (l_list*)malloc(sizeof(l_list));
+	new_node = (t_list *)malloc(sizeof(t_list));
 	if (!new_node)
 		return (NULL);
 	new_node->value = value;
 	new_node->index = -1;
-	new_node->nextNode = NULL;
+	new_node->nextnode = NULL;
 	return (new_node);
 }
 
-void	add_node(l_list **list, int value)
+void	add_node(t_list **list, int value)
 {
-	l_list *last;
-	l_list	*new;
+	t_list	*last;
+	t_list	*new;
 
 	new = create_node(value);
 	if (!new)
@@ -27,24 +27,24 @@ void	add_node(l_list **list, int value)
 		return ;
 	}
 	last = find_last_node(*list);
-	last->nextNode = new;
+	last->nextnode = new;
 	return ;
 }
 
-void	print_list(l_list *list)
+void	print_list(t_list *list)
 {
 	while (list != NULL)
 	{
 		printf("num = %d, rank = %d\n", list->value, list->index);
-		list = list->nextNode;
+		list = list->nextnode;
 	}
 	printf("done printing list\n");
 }
 
-void	assign_index(l_list *stack_a)
+void	assign_index(t_list *stack_a)
 {
-	l_list	*current;
-	l_list	*compare;
+	t_list	*current;
+	t_list	*compare;
 	int		rank;
 
 	current = stack_a;
@@ -56,14 +56,14 @@ void	assign_index(l_list *stack_a)
 		{
 			if (current->value > compare->value)
 				rank++;
-			compare = compare->nextNode;
+			compare = compare->nextnode;
 		}
 		current->index = rank;
-		current = current->nextNode;
+		current = current->nextnode;
 	}
 }
 
-int	find_max_num(l_list* stack_a)
+int	find_max_num(t_list *stack_a)
 {
 	int	rank;
 	int	num;
@@ -77,19 +77,19 @@ int	find_max_num(l_list* stack_a)
 			rank = stack_a->index;
 			num = stack_a->value;
 		}
-		stack_a = stack_a->nextNode;
+		stack_a = stack_a->nextnode;
 	}
 	return (num);
 }
 
-int	list_size(l_list* stack_a)
+int	list_size(l_list *stack_a)
 {
 	int	i;
 
 	i = 0;
 	while (stack_a)
 	{
-		stack_a = stack_a->nextNode;
+		stack_a = stack_a->nextnode;
 		i++;
 	}
 	return (i);

@@ -21,10 +21,10 @@ static int	ft_counter(const char *s, char c)
 	return (count);
 }
 
-static char*	ft_getstr(const char *s, int word_pos, int word_size)
+static char	*ft_getstr(const char *s, int word_pos, int word_size)
 {
 	int		i;
-	char*	str;
+	char	*str;
 
 	i = 0;
 	str = malloc(word_size + 1);

@@ -1,11 +1,11 @@
 #include "push_swap.h"
 
-l_list	*find_last_node(l_list *head)
+t_list	*find_last_node(t_list *head)
 {
 	if (!head)
 		return (NULL);
-	while (head->nextNode)
-		head = head->nextNode;
+	while (head->nextnode)
+		head = head->nextnode;
 	return (head);
 }
 

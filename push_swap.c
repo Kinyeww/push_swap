@@ -31,7 +31,7 @@ int	ft_checknum(char **arr)
 	return (1);
 }
 
-char**	ft_tokenise(int argc, char **argv)
+char	**ft_tokenise(int argc, char **argv)
 {
 	char	**tokens;
 	char	*joined;
@@ -45,16 +45,9 @@ char**	ft_tokenise(int argc, char **argv)
 		joined = ft_strjoin_space(joined, argv[i]);
 		i++;
 	}
-	//printf("joined = %s\n", joined);
 	tokens = ft_split(joined, ' ');
-	int	check = 0;
-	while (tokens[check])
-	{
-		//printf("ft_split = %s\n", tokens[check]);
-		check++;
-	}
 	free (joined);
-	if (!tokens || num_only(tokens) != 1) //check invalid chars
+	if (!tokens || num_only(tokens) != 1)
 	{
 		free_tokens(tokens);
 		return (0);
@@ -62,27 +55,27 @@ char**	ft_tokenise(int argc, char **argv)
 	return (tokens);
 }
 
-int	check_dupes(l_list *stack_a)
+int	check_dupes(t_list *stack_a)
 {
 	int		cmp;
-	l_list	*start;
+	t_list	*start;
 
-	while (stack_a->nextNode)
+	while (stack_a->nextnode)
 	{
 		start = stack_a;
 		cmp = stack_a->value;
-		while (start->nextNode)
+		while (start->nextnode)
 		{
-			start = start->nextNode;
+			start = start->nextnode;
 			if (cmp == start->value)
 				return (0);
 		}
-		stack_a = stack_a->nextNode;
+		stack_a = stack_a->nextnode;
 	}
 	return (1);
 }
 
-void	radix_sort(l_list **stack_a, l_list **stack_b)
+void	radix_sort(t_list **stack_a, t_list **stack_b)
 {
 	int	max_num;
 	int	max_bit;
@@ -99,13 +92,11 @@ void	radix_sort(l_list **stack_a, l_list **stack_b)
 	while (i < max_bit)
 	{
 		j = 0;
-		while (j < max_size)
+		while (j++ < max_size)
 		{
 			if ((((*stack_a)->index >> i) & 1) == 1)
 				rotate_a(stack_a);
-			else
-				push_to_b(stack_a, stack_b);
-			j++;
+			push_to_b(stack_a, stack_b);
 		}
 		while (*stack_b)
 			push_to_a(stack_b, stack_a);
@@ -113,37 +104,35 @@ void	radix_sort(l_list **stack_a, l_list **stack_b)
 	}
 }
 
-l_list	*push_swap(int argc, char **argv)
+t_list	*push_swap(int argc, char **argv)
 {
-	l_list	*stack_a;
-	l_list	*stack_b;
+	t_list	*stack_a;
+	t_list	*stack_b;
 	char	**checked;
 	int	i;
 	int	value;
-	
+
 	checked = ft_tokenise(argc, argv);
-	if (!checked || ft_checknum(checked) != 1) //check overflow and invalid
+	if (!checked || ft_checknum(checked) != 1)
 	{
 		free_tokens(checked);
 		return (NULL);
 	}
-	//printf("atoi now\n");
 	value = ft_atoi(checked[0]);
-	stack_a = create_node(value); //initialise node
+	stack_a = create_node(value);
 	i = 1;
-	while (checked[i]) // start parsing value into nodes
+	while (checked[i])
 	{
 		value = ft_atoi(checked[i]);
 		add_node(&stack_a, value);
 		i++;
 	}
-	if (!(check_dupes(stack_a))) //check for dupes
+	if (!(check_dupes(stack_a)))
 	{
 		free(stack_a);
 		return (NULL);
 	}
 	assign_index(stack_a);
-	//print_list(stack_a); // checking only
 	stack_b = NULL;
 	radix_sort(&stack_a, &stack_b);
 	return (stack_a);
