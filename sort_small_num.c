@@ -14,8 +14,8 @@
 
 void	sort_two(t_list **stack_a)
 {
-	if ((*stack_a)->rank > (*stack_a)->nextnode->rank)
-		
+	if ((*stack_a)->index > (*stack_a)->nextnode->index)
+		write(1, "sa\n", 3);
 }
 
 void	sort_three(t_list **stack_a)
@@ -24,65 +24,45 @@ void	sort_three(t_list **stack_a)
 	int	b;
 	int	c;
 
-	a = (*stack_a)->nbr;
-	b = (*stack_a)->nextnode->nbr;
-	c = (*stack_a)->nextnode->next->nbr;
+	a = (*stack_a)->index;
+	b = (*stack_a)->nextnode->index;
+	c = (*stack_a)->nextnode->nextnode->index;
 	if (a > b && b < c && a < c)
-		sa(stack_a);
+		write(1, "sa\n", 3);
 	else if (a > b && b > c)
 	{
-		sa(stack_a);
-		rra(stack_a);
+		write(1, "sa\n", 3);
+		write(1, "rra\n", 4);
 	}
 	else if (a > b && b < c && a > c)
-		ra(stack_a);
+		write(1, "ra\n", 3);
 	else if (a < b && b > c && a < c)
 	{
-		sa(stack_a);
-		ra(stack_a);
+		write(1, "sa\n", 3);
+		write(1, "ra\n", 3);
 	}
 	else if (a < b && b > c && a > c)
-		rra(stack_a);
-}
-
-void	bring_to_top(t_list **stack, int value)
-{
-	int	position;
-	int	size;
-
-	position = find_position(*stack, value);
-	size = stack_size(*stack);
-	if (position < (size / 2))
-	{
-		while ((*stack)->nbr != value)
-			ra(stack);
-	}
-	else
-	{
-		while ((*stack)->nbr != value)
-			rra(stack);
-	}
+		write(1, "rra\n", 4);
 }
 
 void	sort_four(t_list **stack_a, t_list **stack_b)
 {
-	int	min;
+	int	size;
 
-	min = find_min(*stack_a);
-	bring_to_top(stack_a, min);
-	pb(stack_a, stack_b);
+	size = list_size(*stack_a);
+	bring_to_top(stack_a, size);
+	write(1, "pb\n", 3);
 	sort_three(stack_a);
-	pa(stack_a, stack_b);
+	write(1, "pa\n", 3);
 }
 
 void	sort_five(t_list **stack_a, t_list **stack_b)
 {
-	int	min;
+	int	size;
 
-	min = find_min(*stack_a);
-	bring_to_top(stack_a, min);
-	pb(stack_a, stack_b);
-	sort_four(stack_a, stack_b);
-	pa(stack_a, stack_b);
+	size = list_size(*stack_a);
+	bring_to_top(stack_a, size);
+	write(1, "pb\n", 3);
+	sort_four(stack_a);
+	write(1, "pa\n", 3);
 }
-

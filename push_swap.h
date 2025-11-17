@@ -33,6 +33,7 @@ void	add_node(t_list **list, int value);
 void	print_list(t_list *list);
 char	**ft_split(char const *s, char c);
 t_list	*find_last_node(t_list *head);
+char	*ft_combine(size_t len1, size_t len2, char const *s1, char const *s2);
 long	ft_atoi(const char *nptr);
 char	*ft_strjoin_space(char const *s1, char const *s2);
 void	radix_sort(t_list **stack_a, t_list **stack_b);
@@ -41,5 +42,8 @@ void	rotate_a(t_list **stack_a);
 void	push_to_a(t_list **stack_b, t_list **stack_a);
 void	push_to_b(t_list **stack_a, t_list **stack_b);
 int		list_size(t_list *stack_a);
+void	free_tokens(char **arr);
+int		ft_checknum(char **arr);
+int		num_only(char **str);
 
 #endif

@@ -43,16 +43,6 @@ void	add_node(t_list **list, int value)
 	return ;
 }
 
-void	print_list(t_list *list)
-{
-	while (list != NULL)
-	{
-		printf("num = %d, rank = %d\n", list->value, list->index);
-		list = list->nextnode;
-	}
-	printf("done printing list\n");
-}
-
 void	assign_index(t_list *stack_a)
 {
 	t_list	*current;

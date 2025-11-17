@@ -36,16 +36,16 @@ char	**ft_tokenise(int argc, char **argv)
 	return (tokens);
 }
 
-void	sort_small_num(int argc, t_list *stack_a, t_list *stack_b)
+void	sort_small_num(int argc, t_list **stack_a, t_list **stack_b)
 {
 	if (argc == 3)
-		sort_two(&stack_a);
+		sort_two(stack_a);
 	else if (argc == 4)
-		sort_three();
+		sort_three(stack_a);
 	else if (argc == 5)
-		sort_four();
+		sort_four(stack_a);
 	else if (argc == 6)
-		sort_five();
+		sort_five(stack_a);
 }
 
 void	radix_sort(t_list **stack_a, t_list **stack_b)
