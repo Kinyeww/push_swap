@@ -84,7 +84,7 @@ int	find_max_num(t_list *stack_a)
 	return (num);
 }
 
-int	list_size(l_list *stack_a)
+int	list_size(t_list *stack_a)
 {
 	int	i;
 

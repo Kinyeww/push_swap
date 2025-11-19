@@ -30,7 +30,6 @@ int		num_only(char **str);
 void	assign_index(t_list *stack_a);
 t_list	*create_node(int value);
 void	add_node(t_list **list, int value);
-void	print_list(t_list *list);
 char	**ft_split(char const *s, char c);
 t_list	*find_last_node(t_list *head);
 char	*ft_combine(size_t len1, size_t len2, char const *s1, char const *s2);
@@ -45,5 +44,17 @@ int		list_size(t_list *stack_a);
 void	free_tokens(char **arr);
 int		ft_checknum(char **arr);
 int		num_only(char **str);
+void	sort_five(t_list **stack_a, t_list **stack_b);
+void	sort_four(t_list **stack_a, t_list **stack_b);
+void	sort_three(t_list **stack_a);
+void	sort_two(t_list **stack_a);
+int		find_pos(t_list *stack_a, int target);
+void	bring_to_top(t_list **stack_a, int size);
+int		check_dupes(t_list *stack_a);
+void	free_tokens(char **arr);
+void	sort_small_num(int argc, t_list **stack_a, t_list **stack_b);
+void	reverse_rotate_a(t_list **stack_a);
+void	swap_a(t_list **stack_a);
+int		find_min(t_list *stack_a);
 
 #endif

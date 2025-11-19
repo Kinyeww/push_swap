@@ -27,7 +27,7 @@ void	rotate_a(t_list **stack_a)
 	write (1, "ra\n", 3);
 }
 
-void	push_to_a(t_list **stack_b, t_list **stack_a) // b to a
+void	push_to_a(t_list **stack_b, t_list **stack_a)
 {
 	t_list	*head_b;
 
@@ -51,4 +51,41 @@ void	push_to_b(t_list **stack_a, t_list **stack_b)
 	head_a->nextnode = *stack_b;
 	*stack_b = head_a;
 	write (1, "pb\n", 3);
+}
+
+void	swap_a(t_list **stack_a)
+{
+	t_list	*head;
+	t_list	*second;
+
+	if (*stack_a == NULL)
+		return ;
+	head = *stack_a;
+	second = head->nextnode;
+	head->nextnode = second->nextnode;
+	second->nextnode = head;
+	*stack_a = second;
+	write (1, "sa\n", 3);
+}
+
+void	reverse_rotate_a(t_list **stack_a)
+{
+	t_list	*second_last;
+	t_list	*last;
+	t_list	*head;
+
+	if (*stack_a == NULL)
+		return ;
+	head = *stack_a;
+	second_last = NULL;
+	while (head->nextnode)
+	{
+		second_last = head;
+		head = head->nextnode;
+	}
+	last = head;
+	last->nextnode = (*stack_a);
+	second_last->nextnode = NULL;
+	(*stack_a) = last;
+	write (1, "rra\n", 4);
 }

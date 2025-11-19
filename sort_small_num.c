@@ -14,8 +14,8 @@
 
 void	sort_two(t_list **stack_a)
 {
-	if ((*stack_a)->index > (*stack_a)->nextnode->index)
-		write(1, "sa\n", 3);
+	if ((*stack_a)->value > (*stack_a)->nextnode->value)
+		swap_a(stack_a);
 }
 
 void	sort_three(t_list **stack_a)
@@ -24,25 +24,25 @@ void	sort_three(t_list **stack_a)
 	int	b;
 	int	c;
 
-	a = (*stack_a)->index;
-	b = (*stack_a)->nextnode->index;
-	c = (*stack_a)->nextnode->nextnode->index;
+	a = (*stack_a)->value;
+	b = (*stack_a)->nextnode->value;
+	c = (*stack_a)->nextnode->nextnode->value;
 	if (a > b && b < c && a < c)
-		write(1, "sa\n", 3);
+		swap_a(stack_a);
 	else if (a > b && b > c)
 	{
-		write(1, "sa\n", 3);
-		write(1, "rra\n", 4);
+		swap_a(stack_a);
+		reverse_rotate_a(stack_a);
 	}
 	else if (a > b && b < c && a > c)
-		write(1, "ra\n", 3);
+		rotate_a(stack_a);
 	else if (a < b && b > c && a < c)
 	{
-		write(1, "sa\n", 3);
-		write(1, "ra\n", 3);
+		swap_a(stack_a);
+		rotate_a(stack_a);
 	}
 	else if (a < b && b > c && a > c)
-		write(1, "rra\n", 4);
+		reverse_rotate_a(stack_a);
 }
 
 void	sort_four(t_list **stack_a, t_list **stack_b)
@@ -51,9 +51,9 @@ void	sort_four(t_list **stack_a, t_list **stack_b)
 
 	size = list_size(*stack_a);
 	bring_to_top(stack_a, size);
-	write(1, "pb\n", 3);
+	push_to_b(stack_a, stack_b);
 	sort_three(stack_a);
-	write(1, "pa\n", 3);
+	push_to_a(stack_b, stack_a);
 }
 
 void	sort_five(t_list **stack_a, t_list **stack_b)
@@ -62,7 +62,7 @@ void	sort_five(t_list **stack_a, t_list **stack_b)
 
 	size = list_size(*stack_a);
 	bring_to_top(stack_a, size);
-	write(1, "pb\n", 3);
-	sort_four(stack_a);
-	write(1, "pa\n", 3);
+	push_to_b(stack_a, stack_b);
+	sort_four(stack_a, stack_b);
+	push_to_a(stack_b, stack_a);
 }

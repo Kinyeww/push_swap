@@ -1,19 +1,5 @@
 #include "push_swap.h"
 
-t_list	*find_min(t_list *stack_a)
-{
-	t_list	*min;
-
-	min = stack_a;
-	while (stack_a)
-	{
-		if (min->index > stack_a->index )
-			min = stack_a;
-		stack_a = stack_a->nextnode;
-	}
-	return (min);
-}
-
 int	find_pos(t_list *stack_a, int target)
 {
 	int	pos;
@@ -21,10 +7,10 @@ int	find_pos(t_list *stack_a, int target)
 	pos = 0;
 	while (stack_a)
 	{
-		if (stack_a->index == target)
+		if (stack_a->value == target)
 			return (pos);
 		pos++;
-		stack_a->nextnode;
+		stack_a = stack_a->nextnode;
 	}
 	return (-1);
 }
@@ -32,20 +18,35 @@ int	find_pos(t_list *stack_a, int target)
 void	bring_to_top(t_list **stack_a, int size)
 {
 	int	min_pos;
-	int	moves;
+	int	min;
 
-	min_pos = find_pos(*stack_a, size);
+	min = find_min(*stack_a);
+	min_pos = find_pos(*stack_a, min);
 	if (min_pos < 0)
 		return ;
 	if (min_pos < (size / 2))
 	{
 		while (min_pos-- > 0)
-			write (1, "ra\n", 3);
+			rotate_a(stack_a);
 	}
 	else
 	{
-		moves = size - min_pos;
-		while (min_pos-- < 0)
-			write (1, "rra\n", 4);
+		size -= min_pos;
+		while (size-- > 0)
+			reverse_rotate_a(stack_a);
 	}
+}
+
+int	find_min(t_list *stack_a)
+{
+	int	compare;
+
+	compare = stack_a->value;
+	while (stack_a)
+	{
+		if (stack_a->value < compare)
+			compare = stack_a->value;
+		stack_a = stack_a->nextnode;
+	}
+	return (compare);
 }

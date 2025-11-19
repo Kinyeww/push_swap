@@ -30,3 +30,28 @@ int	ft_checknum(char **arr)
 	}
 	return (1);
 }
+
+int	check_dupes(t_list *stack_a)
+{
+	int		check;
+	t_list	*head;
+	t_list	*current;
+
+	check = 0;
+	head = stack_a;
+	while (stack_a)
+	{
+		current = head;
+		check = 0;
+		while (current)
+		{
+			if (current->value == stack_a->value)
+				check++;
+			if (check == 2)
+				return (0);
+			current = current->nextnode;
+		}
+		stack_a = stack_a->nextnode;
+	}
+	return (1);
+}

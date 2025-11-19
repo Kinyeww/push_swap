@@ -43,9 +43,9 @@ void	sort_small_num(int argc, t_list **stack_a, t_list **stack_b)
 	else if (argc == 4)
 		sort_three(stack_a);
 	else if (argc == 5)
-		sort_four(stack_a);
+		sort_four(stack_a, stack_b);
 	else if (argc == 6)
-		sort_five(stack_a);
+		sort_five(stack_a, stack_b);
 }
 
 void	radix_sort(t_list **stack_a, t_list **stack_b)
@@ -69,7 +69,8 @@ void	radix_sort(t_list **stack_a, t_list **stack_b)
 		{
 			if ((((*stack_a)->index >> i) & 1) == 1)
 				rotate_a(stack_a);
-			push_to_b(stack_a, stack_b);
+			else
+				push_to_b(stack_a, stack_b);
 		}
 		while (*stack_b)
 			push_to_a(stack_b, stack_a);
@@ -101,7 +102,10 @@ t_list	*push_swap(char **checked, int argc)
 	assign_index(stack_a);
 	stack_b = NULL;
 	if (stack_a->index < 5)
+	{
 		sort_small_num(argc, &stack_a, &stack_b);
+		return (stack_a);
+	}
 	radix_sort(&stack_a, &stack_b);
 	return (stack_a);
 }
