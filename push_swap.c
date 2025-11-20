@@ -21,6 +21,8 @@ char	**ft_tokenise(int argc, char **argv)
 	i = 1;
 	joined = NULL;
 	tokens = NULL;
+	if (argv[i][0] == '\0')
+		return (NULL);
 	while (i < argc)
 	{
 		joined = ft_strjoin_space(joined, argv[i]);
@@ -65,7 +67,7 @@ void	radix_sort(t_list **stack_a, t_list **stack_b)
 	while (max_num >> max_bit != 0)
 		max_bit++;
 	i = -1;
-	while (i++ < max_bit)
+	while (++i < max_bit)
 	{
 		j = 0;
 		while (j++ < max_size)
