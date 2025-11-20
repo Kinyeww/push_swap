@@ -6,7 +6,7 @@
 /*   By: ckin-yew <ckin-yew@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 22:02:13 by ckin-yew          #+#    #+#             */
-/*   Updated: 2025/11/20 20:29:30 by ckin-yew         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:29:58 by ckin-yew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	sort_five(t_list **stack_a, t_list **stack_b)
 
 void	sort_num(int argc, t_list **stack_a, t_list **stack_b)
 {
-	if ((*stack_a)->index < 5)
+	if (list_size(*stack_a) < 5)
 		sort_small_num(argc, stack_a, stack_a);
 	else
 		radix_sort(stack_a, stack_b);
