@@ -15,6 +15,7 @@
 char	**ft_tokenise(int argc, char **argv)
 {
 	char	**tokens;
+	char	*temp;
 	char	*joined;
 	int		i;
 
@@ -25,7 +26,9 @@ char	**ft_tokenise(int argc, char **argv)
 		return (NULL);
 	while (i < argc)
 	{
+		temp = joined;
 		joined = ft_strjoin_space(joined, argv[i]);
+		free(temp);
 		i++;
 	}
 	tokens = ft_split(joined, ' ');
@@ -99,6 +102,7 @@ t_list	*push_swap(char **checked, int value)
 	if (!(check_dupes(stack_a)))
 	{
 		free_stack(&stack_a);
+		free_tokens(checked);
 		return (NULL);
 	}
 	assign_index(stack_a);
