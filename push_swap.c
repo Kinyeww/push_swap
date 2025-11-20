@@ -78,14 +78,12 @@ void	radix_sort(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-t_list	*push_swap(char **checked, int argc)
+t_list	*push_swap(char **checked, int argc, int value)
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
 	int		i;
-	int		value;
 
-	value = ft_atoi(checked[0]);
 	stack_a = create_node(value);
 	i = 1;
 	while (checked[i])
@@ -96,23 +94,22 @@ t_list	*push_swap(char **checked, int argc)
 	}
 	if (!(check_dupes(stack_a)))
 	{
-		free(stack_a);
+		free_stack(&stack_a);
 		return (NULL);
 	}
 	assign_index(stack_a);
 	stack_b = NULL;
-	if (stack_a->index < 5)
-	{
-		sort_small_num(argc, &stack_a, &stack_b);
-		return (stack_a);
-	}
-	radix_sort(&stack_a, &stack_b);
+	sort_num(argc, &stack_a, &stack_b);
+	free_stack(&stack_a);
+	free_tokens(checked);
+	exit(0);
 	return (stack_a);
 }
 
 int	main(int argc, char **argv)
 {
 	char	**checked;
+	int		value;
 
 	if (argc < 2)
 	{
@@ -125,7 +122,8 @@ int	main(int argc, char **argv)
 		free_tokens(checked);
 		return (1);
 	}
-	if (!(push_swap(checked, argc)))
+	value = ft_atoi(checked[0]);
+	if (!(push_swap(checked, argc, value)))
 	{
 		write(2, "Error\n", 6);
 		return (1);

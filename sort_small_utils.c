@@ -50,3 +50,20 @@ int	find_min(t_list *stack_a)
 	}
 	return (compare);
 }
+
+void	free_stack(t_list **stack)
+{
+	t_list	*tmp;
+	t_list	*head;
+
+	if (!stack || !(*stack))
+		return ;
+	head = (*stack);
+	while (head)
+	{
+		tmp = head;
+		head = head->nextnode;
+		free (tmp);
+	}
+	(*stack) = NULL;
+}
