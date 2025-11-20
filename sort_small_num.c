@@ -67,10 +67,10 @@ void	sort_five(t_list **stack_a, t_list **stack_b)
 	push_to_a(stack_b, stack_a);
 }
 
-void	sort_num(int argc, t_list **stack_a, t_list **stack_b)
+void	sort_num(t_list **stack_a, t_list **stack_b)
 {
 	if (list_size(*stack_a) < 5)
-		sort_small_num(argc, stack_a, stack_a);
+		sort_small_num(stack_a, stack_a);
 	else
 		radix_sort(stack_a, stack_b);
 }

@@ -52,11 +52,11 @@ int		find_pos(t_list *stack_a, int target);
 void	bring_to_top(t_list **stack_a, int size);
 int		check_dupes(t_list *stack_a);
 void	free_tokens(char **arr);
-void	sort_small_num(int argc, t_list **stack_a, t_list **stack_b);
+void	sort_small_num(t_list **stack_a, t_list **stack_b);
 void	reverse_rotate_a(t_list **stack_a);
 void	swap_a(t_list **stack_a);
 int		find_min(t_list *stack_a);
 void	free_stack(t_list **stack);
-void	sort_num(int argc, t_list **stack_a, t_list **stack_b);
+void	sort_num(t_list **stack_a, t_list **stack_b);
 
 #endif
